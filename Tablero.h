@@ -1,5 +1,6 @@
-#include <iostream>
-#include <vector>
+#ifndef TABLERO_H
+#define TABLERO_H
+
 
 class Tablero {
 private:
@@ -12,3 +13,5 @@ public:
     char verificarGanador();
 
 };
+
+#endif 
