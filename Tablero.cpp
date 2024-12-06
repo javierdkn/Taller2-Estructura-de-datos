@@ -8,7 +8,7 @@ private:
 
 public:
     
-    Tablero() {
+    Tablero::Tablero() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 tablero[i][j] = ' ';
@@ -17,7 +17,7 @@ public:
     }
 
     
-    void mostrarTablero() {
+    void Tablero::mostrarTablero() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 std::cout << tablero[i][j];
@@ -29,7 +29,7 @@ public:
     }
 
     
-    bool colocar(int fila, int columna, char simbolo) {
+    bool Tablero::colocar(int fila, int columna, char simbolo) {
         if (fila < 0 || fila >= 3 || columna < 0 || columna >= 3) {
             std::cerr << "Posición fuera de rango.\n";
             return false;
@@ -43,7 +43,7 @@ public:
     }
 
     
-    char verificarGanador() {
+    char Tablero::verificarGanador() {
         
         for (int i = 0; i < 3; ++i) {
             if (tablero[i][0] == tablero[i][1] && tablero[i][1] == tablero[i][2] && tablero[i][0] != ' ')
