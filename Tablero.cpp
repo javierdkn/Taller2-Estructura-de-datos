@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "Tablero.h"
 
 class Tablero3x3 {
 private:
