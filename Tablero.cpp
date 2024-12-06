@@ -2,13 +2,13 @@
 #include <vector>
 #include "Tablero.h"
 
-class Tablero3x3 {
+class Tablero {
 private:
     char tablero[3][3]; 
 
 public:
     
-    Tablero3x3() {
+    Tablero() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 tablero[i][j] = ' ';
