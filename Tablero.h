@@ -10,7 +10,7 @@ public:
     Tablero();
     void mostrarTablero();
     bool colocar(int fila, int columna, char simbolo);
-    char verificarGanador();
+    bool verificarGanador();
 
 };
 
