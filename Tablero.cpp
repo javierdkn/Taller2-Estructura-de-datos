@@ -37,20 +37,38 @@ bool Tablero::colocar(int fila, int columna, char simbolo) {
 }
 
     
-char Tablero::verificarGanador() {
-        
-    for (int i = 0; i < 3; ++i) {
-        if (tablero[i][0] == tablero[i][1] && tablero[i][1] == tablero[i][2] && tablero[i][0] != ' ')
-            return tablero[i][0];
-        if (tablero[0][i] == tablero[1][i] && tablero[1][i] == tablero[2][i] && tablero[0][i] != ' ')
-            return tablero[0][i];
-    }
-        
-    if (tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2] && tablero[0][0] != ' ')
-        return tablero[0][0];
-    if (tablero[0][2] == tablero[1][1] && tablero[1][1] == tablero[2][0] && tablero[0][2] != ' ')
-        return tablero[0][2];
+bool Tablero::verificarGanador() {
 
-    return ' '; 
+    int i,j=0;
+    for(i=0;i<3;i++)
+    {
+        if(tablero[i][j]!=' ')
+        {
+            if(tablero[i][j]==tablero[i][j+1] && tablero[i][j]==tablero[i][j+2])
+                return true;
+        }
+    }
+    i=0;
+    for(j=0;j<3;j++)
+    {
+        if(tablero[i][j]!=' ')
+        {
+            if(tablero[i][j]==tablero[i+1][j] && tablero[i][j]==tablero[i+2][j])
+                return true;
+        }
+    }
+    i=0;
+    j=0;
+    if(tablero[i][j]!=' ')
+    {
+        if(tablero[i][j]==tablero[i+1][j+1]&& tablero[i][j]==tablero[i+2][j+2])
+            return true;
+    }
+    if(tablero[i+2][j]!=' ')
+    {
+        if(tablero[i+2][j]==tablero[i+1][j+1] && tablero[i+2][j]==tablero[i][j+2])
+            return true;
+    }
+    return false;
 }
 
