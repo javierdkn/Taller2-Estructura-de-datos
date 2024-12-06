@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
-class Tablero3x3 {
+class Tablero {
 private:
     char tablero[3][3];
 
 public:
-    Tablero3x3();
+    Tablero();
     void mostrarTablero();
     bool colocar(int fila, int columna, char simbolo);
     char verificarGanador();
