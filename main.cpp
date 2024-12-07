@@ -6,39 +6,12 @@ using namespace std;
 char letraJugador, letraCPU;
 int espaciosLibres;
 
+void insertarFichaCPU(Tablero &tablero){
+    tablero.insertarFichaCPU();
+}
+
 void insertarFichaHumano(Tablero &tablero) {
-    if(tablero.verificarGanador())
-    {
-        cout<<endl<<"GANADOR: CPU"<<endl;
-        return;
-    }
-    else if(espaciosLibres==0)
-    {
-        cout<<endl<<"LA POSICION TERMINA EN EMPATE. Ultimo turno: CPU"<<endl;
-        return;
-    }
-    int fila, columna;
-    bool valido = false;
-
-    while (!valido) {
-        cout << "Ingrese fila (1-3): ";
-        cin >> fila;
-        cout << "Ingrese columna (1-3): ";
-        cin >> columna;
-
-        fila--;
-        columna--;
-
-        
-        if (tablero.colocar(fila, columna, letraJugador)) {
-            valido = true;
-        } else {
-            cout << "Posición inválida. Intente de nuevo.\n";
-        }
-    }
-
-    tablero.mostrarTablero();
-    espaciosLibres--;
+    tablero.insertarFichaHumano();
 }
 
 void comenzarJuego(Tablero &tablero) {
