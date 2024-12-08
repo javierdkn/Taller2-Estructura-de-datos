@@ -5,10 +5,10 @@
 class Tablero {
 
 private:
-    char tabla[3][3]; // Tablero de juego
-    int espaciosLibres; // Espacios disponibles en el tablero
-    char letraJugador; // Ficha del jugador
-    char letraCPU; // Ficha de la CPU
+    char tabla[3][3]; 
+    int espaciosLibres; 
+    char letraJugador; 
+    char letraCPU; 
 
     bool estadoTerminal();
     bool fueraDeRango(int fila, int columna);
@@ -20,6 +20,9 @@ public:
     void insertarFichaHumano();
     void insertarFichaCPU();
     void elegirFicha(char jugadorFicha);
+    void reiniciarTablero();
+    char getLetraJugador();
+
 };
 
 #endif
