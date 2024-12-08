@@ -3,8 +3,8 @@
 
 using namespace std;
 
-char letraJugador, letraCPU;
-int espaciosLibres;
+char letraJugador;
+
 
 void insertarFichaCPU(Tablero &tablero){
     tablero.insertarFichaCPU();
@@ -15,7 +15,7 @@ void insertarFichaHumano(Tablero &tablero) {
 }
 
 void comenzarJuego(Tablero &tablero) {
-    espaciosLibres = 9;
+    
     if (letraJugador == ' ') {
         cout << "ERROR: No se ha elegido una ficha para el jugador." << endl;
         return;
@@ -29,7 +29,7 @@ void comenzarJuego(Tablero &tablero) {
     
 }
 
-void elegirValor() {
+void elegirValor(Tablero &tablero) {
     int opcion;
 
     cout << "Ingrese con qué valor desea jugar:\n";
@@ -41,11 +41,9 @@ void elegirValor() {
         cin >> opcion;
 
         if (opcion == 1) {
-            letraJugador = 'X';
-            letraCPU = 'O';
+            tablero.elegirFicha('X');
         } else if (opcion == 2) {
-            letraJugador = 'O';
-            letraCPU = 'X';
+            tablero.elegirFicha('O');
         } else {
             cout << "ERROR: La opción elegida no es válida. Intente de nuevo.\n";
         }
@@ -57,7 +55,7 @@ void ejecutarMenu() {
     int opcion;
 
     while (true) {
-        cout << "Bienvenido/a al programa de Tic Tac Toe.\n";
+        cout << "Bienvenido/a juguemos al GATO.\n";
         cout << "1. Elegir ficha\n";
         cout << "2. Comenzar juego\n";
         cout << "3. Salir\n";
@@ -66,13 +64,13 @@ void ejecutarMenu() {
 
         switch (opcion) {
             case 1:
-                elegirValor();
+                elegirValor(tablero);
                 break;
             case 2:
                 comenzarJuego(tablero);
                 break;
             case 3:
-                cout << "Saliendo del programa. ¡Hasta luego!\n";
+                cout << "Saliendo del GATO. ¡Hasta luego!\n";
                 return;
             default:
                 cout << "ERROR: Opción inválida.\n";

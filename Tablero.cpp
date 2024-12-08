@@ -2,11 +2,11 @@
 #include <iostream>
 #include <limits>
 
-#define CLEAR "clear" // Cambia a "cls" si estás en Windows
+#define CLEAR "clear" 
 
 using namespace std;
 
-// Constructor
+
 Tablero::Tablero() {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
@@ -18,7 +18,7 @@ Tablero::Tablero() {
     letraCPU = ' ';
 }
 
-// Mostrar el tablero
+
 void Tablero::mostrarTabla() {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
@@ -30,34 +30,58 @@ void Tablero::mostrarTabla() {
     }
 }
 
-// Verificar si el estado es terminal
+
 bool Tablero::estadoTerminal() {
-    for (int i = 0; i < 3; i++) {
-        if (tabla[i][0] == tabla[i][1] && tabla[i][1] == tabla[i][2] && tabla[i][0] != ' ')
-            return true;
-        if (tabla[0][i] == tabla[1][i] && tabla[1][i] == tabla[2][i] && tabla[0][i] != ' ')
+    int i,j=0;
+    for(i=0;i<3;i++)
+    {
+        if(tabla[i][j]!=' ')
+        {
+            if(tabla[i][j]==tabla[i][j+1] && tabla[i][j]==tabla[i][j+2])
+                return true;
+        }
+    }
+    i=0;
+    for(j=0;j<3;j++)
+    {
+        if(tabla[i][j]!=' ')
+        {
+            if(tabla[i][j]==tabla[i+1][j] && tabla[i][j]==tabla[i+2][j])
+                return true;
+        }
+    }
+    i=0;
+    j=0;
+    if(tabla[i][j]!=' ')
+    {
+        if(tabla[i][j]==tabla[i+1][j+1]&& tabla[i][j]==tabla[i+2][j+2])
             return true;
     }
-    if (tabla[0][0] == tabla[1][1] && tabla[1][1] == tabla[2][2] && tabla[0][0] != ' ')
-        return true;
-    if (tabla[0][2] == tabla[1][1] && tabla[1][1] == tabla[2][0] && tabla[0][2] != ' ')
+    if(tabla[i+2][j]!=' ')
+    {
+        if(tabla[i+2][j]==tabla[i+1][j+1] && tabla[i+2][j]==tabla[i][j+2])
+            return true;
+    }
+    return false;
+}
+
+
+bool Tablero::fueraDeRango(int fila, int columna) {
+    if (fila < 0 || fila >= 3 || columna < 0 || columna >= 3)
         return true;
     return false;
 }
 
-// Verificar si la posición está fuera de rango
-bool Tablero::fueraDeRango(int fila, int columna) {
-    return fila < 0 || fila >= 3 || columna < 0 || columna >= 3;
-}
 
-// Insertar ficha del jugador
 void Tablero::insertarFichaHumano() {
     mostrarTabla();
     if (estadoTerminal()) {
-        cout << endl << "GANADOR: CPU" << endl;
+        cout << endl << "PERDISTE. GANADOR CPU" << endl;
+        reiniciarTablero();
         return;
     } else if (espaciosLibres == 0) {
-        cout << endl << "LA POSICION TERMINA EN EMPATE. Ultimo turno: CPU" << endl;
+        cout << endl << "EL JUEGO TERMINA EN EMPATE." << endl;
+        reiniciarTablero();
         return;
     }
 
@@ -79,15 +103,17 @@ void Tablero::insertarFichaHumano() {
     insertarFichaCPU();
 }
 
-// Insertar ficha de la CPU
+
 void Tablero::insertarFichaCPU() {
     if (estadoTerminal()) {
         mostrarTabla();
-        cout << endl << "GANADOR: JUGADOR" << endl;
+        cout << endl << "GANASTE. GATO TIPICO CHILENO" << endl;
+        reiniciarTablero();
         return;
     } else if (espaciosLibres == 0) {
         mostrarTabla();
-        cout << endl << "LA POSICION TERMINA EN EMPATE. Ultimo turno: Jugador" << endl;
+        reiniciarTablero();
+        cout << endl << "EL JUEGO TERMINA EN EMPATE." << endl;
         return;
     }
 
@@ -117,13 +143,13 @@ void Tablero::insertarFichaCPU() {
     insertarFichaHumano();
 }
 
-// Elegir ficha para el jugador
+
 void Tablero::elegirFicha(char jugadorFicha) {
     letraJugador = jugadorFicha;
     letraCPU = (jugadorFicha == 'X') ? 'O' : 'X';
 }
 
-// Minimax
+
 int Tablero::minimax(bool turnoCPU) {
     if (estadoTerminal()) {
         if (turnoCPU)
@@ -162,4 +188,15 @@ int Tablero::minimax(bool turnoCPU) {
         }
     }
     return mejorValor;
+}
+void Tablero::reiniciarTablero() {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            tabla[i][j] = ' '; 
+        }
+    }
+    espaciosLibres = 9; 
+}
+char Tablero::getLetraJugador() {
+    return this-> letraJugador;
 }
