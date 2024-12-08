@@ -3,9 +3,10 @@
 
 Javier Andrés Dinamarca Fredes, RUT: 21.416.181-8, correo institucional: javier.dinamarca@alumnos.ucn.cl
 
-Ejecución del código: 
+Ejecución del código: g++ Tablero.cpp main.cpp -o Main
 
-Una vez compilado: 
+Una vez compilado:./Main.exe
+ 
 
 ¿Qué es el Algoritmo Minimax?
 El algoritmo Minimax es una estrategia de decisión utilizada principalmente en juegos de dos jugadores con información perfecta, como el ajedrez o el tres en raya. Su objetivo es encontrar el mejor movimiento posible para el jugador que lo utiliza, asumiendo que el oponente también jugará de manera óptima.
