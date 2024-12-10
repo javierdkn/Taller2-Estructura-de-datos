@@ -18,3 +18,22 @@ La idea central:
 -Maximizar la ganancia mínima: De manera equivalente, se puede interpretar como maximizar la ganancia mínima que el jugador puede obtener, independientemente de las acciones del oponente.
 
 -Árbol de juego: El algoritmo construye un árbol donde cada nodo representa un posible estado del juego y cada rama representa un movimiento. Las hojas del árbol corresponden a estados finales del juego.
+
+- Búsqueda α-β busca primero en profundidad
+- La poda α-β se basa en la idea de disponer de dos valores que conforman una ventana a la cual deben pertenecer  - los valores de f(n) para que sean considerados
+- En los nodos MAX se utiliza el parámetro α que determina el máximo de los valores de los  nodos sucesores encontrados hasta el momento
+- En los nodos MIN se utiliza el parámetro β que va a ser, en cada momento, el mínimo de los valores encontrados. 
+
+-REGLAS DE FINALIZACIÓN 
+-En los nodos MAX la condición de poda es αp ≥βp-1 
+(Se puede podar por debajo de un nodo MAX si su valor alfa es mayor o igual que al menos un beta antecesor) 
+
+-En los nodos MIN la condición de poda es βp ≤αp-1 
+(Se puede podar por debajo de un nodo MIN si su valor beta es menor o igual que al menos un alfa antecesor) 
+
+PROCEDIMIENTO 
+
+1º Descender primero en profundidad hasta la profundidad total del ply 
+2º Aplicar la evaluación heurística a un nodo y a todos sus hermanos 
+3º Asignar valores al padre: el valor se oferta al abuelo como valor potencial 
+4º Descender a otro nieto y terminar la exploración del padre si alguno de sus valores cumple el criterio de parada
