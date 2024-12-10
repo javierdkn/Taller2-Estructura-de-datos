@@ -125,7 +125,7 @@ void Tablero::insertarFichaCPU() {
             if (tabla[i][j] == ' ') {
                 tabla[i][j] = letraCPU;
                 espaciosLibres--;
-                movValor = minimax(false,-100,100);
+                movValor = minimax(false,-10000,10000);
                 if (movValor > mejorMovValor) {
                     mejorMovValor = movValor;
                     mejorMovFila = i;
@@ -151,12 +151,9 @@ void Tablero::elegirFicha(char jugadorFicha) {
 
 
 int Tablero::minimax(bool turnoCPU, int alfa, int beta) {
-    
     if (estadoTerminal()) {
-        if (turnoCPU)
-            return -1 * (espaciosLibres + 1);
-        else
-            return 1 * (espaciosLibres + 1);
+        if (turnoCPU) return -1 * (espaciosLibres + 1);
+        else return 1 * (espaciosLibres + 1);
     } else if (espaciosLibres == 0) {
         return 0;
     }
@@ -165,52 +162,39 @@ int Tablero::minimax(bool turnoCPU, int alfa, int beta) {
     char ficha;
 
     if (turnoCPU) {
-        mejorValor = -100; 
+        mejorValor = -100;
         ficha = letraCPU;
-        turnoCPU = false; 
     } else {
-        mejorValor = 100; 
+        mejorValor = 100;
         ficha = letraJugador;
-        turnoCPU = true; 
     }
 
-    
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            if (tabla[i][j] == ' ') { 
-                
+            if (tabla[i][j] == ' ') {
                 tabla[i][j] = ficha;
                 espaciosLibres--;
 
-                int valMinimax = minimax(turnoCPU, alfa, beta);
+                int valMinimax = minimax(!turnoCPU, alfa, beta);
 
                 tabla[i][j] = ' ';
                 espaciosLibres++;
 
-                
                 if (turnoCPU) {
-                    if (valMinimax > mejorValor) {
-                        mejorValor = valMinimax;
-                    }
-                    if (mejorValor > alfa) {
-                        alfa = mejorValor;
-                    }
+                    mejorValor = (valMinimax > mejorValor) ? valMinimax : mejorValor;
+                    alfa = (mejorValor > alfa) ? mejorValor : alfa;
                 } else {
-                    if (valMinimax < mejorValor) {
-                        mejorValor = valMinimax;
-                    }
-                    if (mejorValor < beta) {
-                        beta = mejorValor;
-                    }
+                    mejorValor = (valMinimax < mejorValor) ? valMinimax : mejorValor;
+                    beta = (mejorValor < beta) ? mejorValor : beta;
                 }
 
-                
                 if (beta <= alfa) {
                     return mejorValor;
                 }
             }
         }
     }
+
     return mejorValor;
 }
 void Tablero::reiniciarTablero() {
@@ -220,6 +204,9 @@ void Tablero::reiniciarTablero() {
         }
     }
     espaciosLibres = 9; 
+    letraJugador = ' ';
+    letraCPU = ' ';
+
 }
 char Tablero::getLetraJugador() {
     return this-> letraJugador;
