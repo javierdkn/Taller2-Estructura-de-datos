@@ -21,10 +21,13 @@ void comenzarJuego(Tablero &tablero) {
         return;
     }
     
-    if (letraJugador == 'X')
+    if (letraJugador == 'X'){
         insertarFichaHumano(tablero);
-    else
-        insertarFichaHumano(tablero);
+    }
+    else{
+        insertarFichaCPU(tablero);
+    }
+        
 
     
 }
@@ -42,8 +45,10 @@ void elegirValor(Tablero &tablero) {
 
         if (opcion == 1) {
             tablero.elegirFicha('X');
+            letraJugador = 'X';
         } else if (opcion == 2) {
             tablero.elegirFicha('O');
+            letraJugador = 'O';
         } else {
             cout << "ERROR: La opción elegida no es válida. Intente de nuevo.\n";
         }
@@ -70,7 +75,7 @@ void ejecutarMenu() {
                 comenzarJuego(tablero);
                 break;
             case 3:
-                cout << "Saliendo del GATO. ¡Hasta luego!\n";
+                cout << "Saliendo del GATO. CHAO\n";
                 return;
             default:
                 cout << "ERROR: Opción inválida.\n";
